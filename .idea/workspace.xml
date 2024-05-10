@@ -5,18 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1a09932-a80e-4f36-8f3c-5227efca7a9f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/aima_core_3_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/commons_cli_1_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_2_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonIterativeDeepeningAlphaBetaSearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Grissinbon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Grissinbon.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/client/TablutClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/client/TablutClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonBlackClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonBlackClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonBlackHeuristic.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonBlackHeuristic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonBlackHeuristic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonBlackHeuristic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/Heuristic.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/Heuristic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/client/TablutClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/client/TablutClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonBlackClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonBlackClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +30,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -43,8 +43,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -52,10 +54,14 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.TablutRandomBlackClient">
+  <component name="RunManager" selected="Application.GrissinbonBlackClient">
     <configuration name="GrissinbonBlackClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unibo.ai.didattica.competition.tablut.grissinbon.client.GrissinbonBlackClient" />
       <module name="Grissinbon" />
@@ -110,10 +116,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TablutRandomBlackClient" />
+        <item itemvalue="Application.GrissinbonBlackClient" />
         <item itemvalue="Application.TablutRandomWhiteClient" />
         <item itemvalue="Application.Server" />
-        <item itemvalue="Application.GrissinbonBlackClient" />
+        <item itemvalue="Application.TablutRandomBlackClient" />
       </list>
     </recent_temporary>
   </component>
@@ -134,10 +140,50 @@
       <option name="presentableId" value="Default" />
       <updated>1715255213736</updated>
       <workItem from="1715255214795" duration="3622000" />
+      <workItem from="1715330656115" duration="6583000" />
     </task>
+    <task id="LOCAL-00001" summary="continuo black heuristic + blackclient">
+      <option name="closed" value="true" />
+      <created>1715275239134</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1715275239134</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="continuo black heuristic + blackclient" />
+    <option name="LAST_COMMIT_MESSAGE" value="continuo black heuristic + blackclient" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/Tablut/lib/aima-core-3.0.0.jar!/aima/core/search/adversarial/IterativeDeepeningAlphaBetaSearch.class</url>
+          <line>107</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.java</url>
+          <line>124</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.java</url>
+          <line>175</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

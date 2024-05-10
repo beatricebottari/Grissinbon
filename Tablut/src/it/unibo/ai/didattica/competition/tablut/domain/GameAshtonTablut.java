@@ -1,6 +1,7 @@
 package it.unibo.ai.didattica.competition.tablut.domain;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import it.unibo.ai.didattica.competition.tablut.exceptions.*;
+import it.unibo.ai.didattica.competition.tablut.grissinbon.heuristic.GrissinbonBlackHeuristic;
+import it.unibo.ai.didattica.competition.tablut.grissinbon.heuristic.GrissinbonWhiteHeuristic;
 
 /**
  * 
@@ -742,13 +745,11 @@ public class GameAshtonTablut implements Game, aima.core.search.adversarial.Game
 	public void clearDrawConditions() {
 		drawConditions.clear();
 	}
-	
 
 	@Override
 	public void endGame(State state) {
 		this.loggGame.fine("Stato:\n"+state.toString());
 	}
-
 
 	@Override
 	public State getInitialState() {
@@ -757,31 +758,297 @@ public class GameAshtonTablut implements Game, aima.core.search.adversarial.Game
 
 	@Override
 	public State.Turn[] getPlayers() {
-		return new State.Turn[0];
+		return new State.Turn[] {State.Turn.BLACK, State.Turn.WHITE} ;
 	}
 
 	@Override
 	public State.Turn getPlayer(State state) {
-		return null;
+		return state.getTurn();
 	}
 
 	@Override
 	public List<Action> getActions(State state) {
-		return null;
+		List<Action> actions = new ArrayList<Action>();
+		State.Turn currentTurn = state.getTurn();
+		for (int i = 0 ; i<state.getBoard().length ; i++) {
+			for (int j = 0 ; j<state.getBoard()[0].length; j++) {
+				if (state.getPawn(i, j).equalsPawn(currentTurn.toString())
+						|| (currentTurn.equals(State.Turn.WHITE) && state.getPawn(i, j).equalsPawn(State.Pawn.KING.toString()))) {
+					actions.addAll(getActionsPawn(i,j,state));
+				}
+			}
+		}
+		return actions;
+	}
+
+	private List<Action> getActionsPawn(int row, int column, State state) {
+
+		List<Action> actions = new ArrayList<>();
+		actions.addAll(getActionsUp(row,column,state));
+		actions.addAll(getActionsDown(row,column,state));
+		actions.addAll(getActionsRight(row,column,state));
+		actions.addAll(getActionsLeft(row,column,state));
+		return actions ;
+	}
+
+	private List<Action> getActionsUp(int row, int column, State state) {
+		boolean fine = false ;
+		List<Action> actions = new ArrayList<>();
+		String initialBox = state.getBox(row,column);
+		for (int i = row-1 ; i>=0 && !fine; i--) {
+
+			String destBox = state.getBox(i, column);
+			Action nextAction = null;
+			try {
+				nextAction = new Action(initialBox,destBox,state.getTurn());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			fine = !checkMoveBoolean(state, nextAction);
+			if(fine==false) {
+				actions.add(nextAction);
+			}
+		}
+		return actions ;
+
+	}
+
+	private List<Action> getActionsDown(int row, int column, State state) {
+		boolean fine = false ;
+		List<Action> actions = new ArrayList<>();
+		String initialBox = state.getBox(row,column);
+		for (int i = row+1 ; i<state.getBoard().length && !fine; i++) {
+
+			String destBox = state.getBox(i, column);
+			Action nextAction = null;
+			try {
+				nextAction = new Action(initialBox,destBox,state.getTurn());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			fine = !checkMoveBoolean(state, nextAction);
+			if(fine==false) {
+				actions.add(nextAction);
+			}
+		}
+		//System.out.println("SOUT getActionsDown: ("+row + " "+column+"): "+actions.size());
+		return actions ;
+
+	}
+	private List<Action> getActionsRight(int row, int column, State state) {
+		boolean fine = false ;
+		List<Action> actions = new ArrayList<>();
+		String initialBox = state.getBox(row,column);
+		for (int i = column+1 ; i<state.getBoard().length && !fine; i++) {
+			String destBox = state.getBox(row, i);
+			Action nextAction = null;
+			try {
+				nextAction = new Action(initialBox,destBox,state.getTurn());
+				//System.out.println("SOUT: Action "+nextAction);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			fine = !checkMoveBoolean(state, nextAction);
+			if(fine==false) {
+				actions.add(nextAction);
+			}
+		}
+		return actions ;
+	}
+	private List<Action> getActionsLeft(int row, int column, State state) {
+		boolean fine = false ;
+		List<Action> actions = new ArrayList<>();
+		String initialBox = state.getBox(row,column);
+		for (int i = column-1 ; i>=0 && !fine; i--) {
+			String destBox = state.getBox(row, i);
+			Action nextAction = null;
+			try {
+				nextAction = new Action(initialBox,destBox,state.getTurn());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			fine = !checkMoveBoolean(state, nextAction);
+			if(fine==false) {
+				actions.add(nextAction);
+			}
+		}
+		return actions ;
+	}
+
+	private boolean checkMoveBoolean(State _state, Action a) {
+		/* controllo la mossa
+		if (a.getTo().length() != 2 || a.getFrom().length() != 2) {
+			return false;
+		}*/
+		State state = _state.clone();
+		int columnFrom = a.getColumnFrom();
+		int columnTo = a.getColumnTo();
+		int rowFrom = a.getRowFrom();
+		int rowTo = a.getRowTo();
+
+		// controllo se sono fuori dal tabellone
+		if (columnFrom > state.getBoard().length - 1 || rowFrom > state.getBoard().length - 1
+				|| rowTo > state.getBoard().length - 1 || columnTo > state.getBoard().length - 1 || columnFrom < 0
+				|| rowFrom < 0 || rowTo < 0 || columnTo < 0) {
+			return false;
+		}
+
+		// controllo che non vada sul trono
+		if (state.getPawn(rowTo, columnTo).equalsPawn(State.Pawn.THRONE.toString())) {
+			return false;
+		}
+
+		// controllo la casella di arrivo
+		if (!state.getPawn(rowTo, columnTo).equalsPawn(State.Pawn.EMPTY.toString())) {
+			return false;
+		}
+		// controllo di non entrare in una citadels
+		if (this.citadels.contains(state.getBox(rowTo, columnTo))
+				&& !this.citadels.contains(state.getBox(rowFrom, columnFrom))) {
+			return false;
+		}
+		if (this.citadels.contains(state.getBox(rowTo, columnTo))
+				&& this.citadels.contains(state.getBox(rowFrom, columnFrom))) {
+			if (rowFrom == rowTo) {
+				if (columnFrom - columnTo > 5 || columnFrom - columnTo < -5) {
+					return false;
+				}
+			} else {
+				if (rowFrom - rowTo > 5 || rowFrom - rowTo < -5) {
+					return false;
+				}
+			}
+
+		}
+
+		//DECIDERE SE TOGLIERE
+		//controllo se cerco di stare fermo
+		if (rowFrom == rowTo && columnFrom == columnTo) {
+			return false;
+		}
+
+		// controllo se sto muovendo una pedina giusta
+		if (state.getTurn().equalsTurn(State.Turn.WHITE.toString())) {
+			if (!state.getPawn(rowFrom, columnFrom).equalsPawn("W")
+					&& !state.getPawn(rowFrom, columnFrom).equalsPawn("K")) {
+				return false;
+			}
+		}
+		if (state.getTurn().equalsTurn(State.Turn.BLACK.toString())) {
+			if (!state.getPawn(rowFrom, columnFrom).equalsPawn("B")) {
+				return false;
+			}
+		}
+
+		// controllo di non muovere in diagonale
+		if (rowFrom != rowTo && columnFrom != columnTo) {
+			return false;
+		}
+
+		//FINO A QUI DECIDERE SE TOGLIERE
+
+		// controllo di non scavalcare pedine
+		if (rowFrom == rowTo) {
+			if (columnFrom > columnTo) {
+				for (int i = columnTo; i < columnFrom; i++) {
+					if (!state.getPawn(rowFrom, i).equalsPawn(State.Pawn.EMPTY.toString())) {
+						if (state.getPawn(rowFrom, i).equalsPawn(State.Pawn.THRONE.toString())) {
+							return false;
+						} else {
+							return false;
+						}
+					}
+					if (this.citadels.contains(state.getBox(rowFrom, i))
+							&& !this.citadels.contains(state.getBox(a.getRowFrom(), a.getColumnFrom()))) {
+						return false;
+					}
+				}
+			} else {
+				for (int i = columnFrom + 1; i <= columnTo; i++) {
+					if (!state.getPawn(rowFrom, i).equalsPawn(State.Pawn.EMPTY.toString())) {
+						if (state.getPawn(rowFrom, i).equalsPawn(State.Pawn.THRONE.toString())) {
+							return false;
+						} else {
+							return false;
+						}
+					}
+					if (this.citadels.contains(state.getBox(rowFrom, i))
+							&& !this.citadels.contains(state.getBox(a.getRowFrom(), a.getColumnFrom()))) {
+						return false;
+					}
+				}
+			}
+		} else {
+			if (rowFrom > rowTo) {
+				for (int i = rowTo; i < rowFrom; i++) {
+					if (!state.getPawn(i, columnFrom).equalsPawn(State.Pawn.EMPTY.toString())) {
+						if (state.getPawn(i, columnFrom).equalsPawn(State.Pawn.THRONE.toString())) {
+							return false;
+						} else {
+							return false;
+						}
+					}
+					if (this.citadels.contains(state.getBox(i, columnFrom))
+							&& !this.citadels.contains(state.getBox(a.getRowFrom(), a.getColumnFrom()))) {
+						return false;
+					}
+				}
+			} else {
+				for (int i = rowFrom + 1; i <= rowTo; i++) {
+					if (!state.getPawn(i, columnFrom).equalsPawn(State.Pawn.EMPTY.toString())) {
+						if (state.getPawn(i, columnFrom).equalsPawn(State.Pawn.THRONE.toString())) {
+							return false;
+						} else {
+							return false;
+						}
+					}
+					if (this.citadels.contains(state.getBox(i, columnFrom))
+							&& !this.citadels.contains(state.getBox(a.getRowFrom(), a.getColumnFrom()))) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+
 	}
 
 	@Override
 	public State getResult(State state, Action action) {
-		return null;
+		State newState = state.clone();
+		this.movePawn(newState, action);
+
+		if(state.getTurn().equals(State.Turn.WHITE))
+			this.checkCaptureWhite(newState, action);
+		else if(state.getTurn().equals(State.Turn.BLACK))
+			this.checkCaptureBlack(newState, action);
+
+		return newState;
 	}
 
 	@Override
 	public boolean isTerminal(State state) {
-		return false;
+		return (state.getTurn().equals(State.Turn.WHITEWIN)
+				|| state.getTurn().equals(State.Turn.BLACKWIN)
+				|| state.getTurn().equals(State.Turn.DRAW)) ;
 	}
 
 	@Override
 	public double getUtility(State state, State.Turn turn) {
-		return 0;
+		if ((turn.equals(State.Turn.BLACK) && state.getTurn().equals(State.Turn.BLACKWIN))
+				|| (turn.equals(State.Turn.WHITE) && state.getTurn().equals(State.Turn.WHITEWIN)))
+			return Double.POSITIVE_INFINITY;
+		else if ((turn.equals(State.Turn.BLACK) && state.getTurn().equals(State.Turn.WHITEWIN))
+				|| (turn.equals(State.Turn.WHITE) && state.getTurn().equals(State.Turn.BLACKWIN)))
+			return Double.NEGATIVE_INFINITY;
+
+		if (turn.equals(State.Turn.WHITE)) {
+			GrissinbonWhiteHeuristic grissinbonH= new GrissinbonWhiteHeuristic(state);
+			return  grissinbonH.evaluateState(); //TODO: MODIFICARE da bea e pie
+		} else {
+			GrissinbonBlackHeuristic grissinbonH= new GrissinbonBlackHeuristic(state);
+			return  grissinbonH.evaluate();
+		}
 	}
 }

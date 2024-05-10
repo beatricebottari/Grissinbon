@@ -9,7 +9,7 @@ import it.unibo.ai.didattica.competition.tablut.client.TablutClient;
 import it.unibo.ai.didattica.competition.tablut.domain.*;
 import it.unibo.ai.didattica.competition.tablut.grissinbon.heuristic.GrissinbonIterativeDeepeningAlphaBetaSearch;
 
-public class GrissinbonClient extends TablutClient{
+public class GrissinbonClient extends TablutClient {
 
         public GrissinbonClient(String player, String name, int timeout, String ipAddress)
                 throws UnknownHostException, IOException {
@@ -42,7 +42,7 @@ public class GrissinbonClient extends TablutClient{
                 e.printStackTrace();
             }
 
-            //Algise saluta
+            //Grissinbon saluta
             this.salutaGrissinbon();
 
             // Il bianco deve fare la prima mossa
@@ -56,6 +56,7 @@ public class GrissinbonClient extends TablutClient{
             else {
                 gameRules = new GameAshtonTablut(99, 0, "logs", "whiteOpponent", this.getName());
             }
+            System.out.println("GAME RULESSSSSSS"+gameRules.toString());
 
             while (true) {
 
@@ -173,6 +174,8 @@ public class GrissinbonClient extends TablutClient{
     private Action findBestMove(GameAshtonTablut tablutGame, State state) {
 
         GrissinbonIterativeDeepeningAlphaBetaSearch search = new GrissinbonIterativeDeepeningAlphaBetaSearch(tablutGame, Double.MIN_VALUE, Double.MAX_VALUE, this.timeout-2);;
+        if(search == null)
+            System.out.println("SEARCHHHHHHHH"+search);
         return search.makeDecision(state);
     }
 

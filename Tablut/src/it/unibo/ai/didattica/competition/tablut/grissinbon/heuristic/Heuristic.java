@@ -6,6 +6,8 @@ import java.util.List;
 
 public abstract class Heuristic {
 
+
+
     public State state;
     public List<String> camps;
     public List<String> escape;
