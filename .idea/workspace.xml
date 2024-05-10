@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1a09932-a80e-4f36-8f3c-5227efca7a9f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Grissinbon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Grissinbon.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/Heuristic.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/Heuristic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/client/TablutClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/client/TablutClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonBlackClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonBlackClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonBlackHeuristic.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonBlackHeuristic.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,26 +33,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.GrissinbonBlackClient">
     <configuration name="GrissinbonBlackClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unibo.ai.didattica.competition.tablut.grissinbon.client.GrissinbonBlackClient" />
@@ -156,6 +148,17 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="continuo black heuristic + blackclient" />
     <option name="LAST_COMMIT_MESSAGE" value="continuo black heuristic + blackclient" />
@@ -182,6 +185,11 @@
           <url>file://$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.java</url>
           <line>175</line>
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/Heuristic.java</url>
+          <line>6</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -6,8 +6,8 @@ import java.util.List;
 
 public abstract class Heuristic {
 
-    private static int LOOSE = -1;
-    private static int WIN = 1;
+    public static int LOOSE = -1;
+    public static int WIN = 1;
 
     public State state;
     public List<String> camps;

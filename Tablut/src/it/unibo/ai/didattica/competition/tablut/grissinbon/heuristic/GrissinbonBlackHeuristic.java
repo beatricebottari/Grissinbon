@@ -137,7 +137,7 @@ public class GrissinbonBlackHeuristic extends Heuristic{
 
 
     private boolean isEscape(int x, int y) {
-        if(escape.contains(state.getBox(this.kingPosition[0], this.kingPosition[1])))
+        if(escapes.contains(state.getBox(this.kingPosition[0], this.kingPosition[1])))
                 return true;
         return false;
     }
