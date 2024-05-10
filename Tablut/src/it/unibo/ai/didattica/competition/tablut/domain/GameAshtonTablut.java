@@ -1045,7 +1045,7 @@ public class GameAshtonTablut implements Game, aima.core.search.adversarial.Game
 
 		if (turn.equals(State.Turn.WHITE)) {
 			GrissinbonWhiteHeuristic grissinbonH= new GrissinbonWhiteHeuristic(state);
-			return  grissinbonH.evaluateState(); //TODO: MODIFICARE da bea e pie
+			return  grissinbonH.evaluate();
 		} else {
 			GrissinbonBlackHeuristic grissinbonH= new GrissinbonBlackHeuristic(state);
 			return  grissinbonH.evaluate();

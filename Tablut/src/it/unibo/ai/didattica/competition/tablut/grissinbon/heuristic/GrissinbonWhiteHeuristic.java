@@ -106,7 +106,7 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
 
         if (this.kingCoordinate == null){
             return LOOSE;
-        } else if (escape.contains(state.getBox(kingCoordinate.getX(), kingCoordinate.getY()))) {
+        } else if (escapes.contains(state.getBox(kingCoordinate.getX(), kingCoordinate.getY()))) {
             return WIN;
         }
 
