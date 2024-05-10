@@ -6,10 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="b1a09932-a80e-4f36-8f3c-5227efca7a9f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Grissinbon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Grissinbon.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonWhiteHeuristic.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonWhiteHeuristic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/Heuristic.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/Heuristic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonWhiteHeuristic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonWhiteHeuristic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/client/TablutClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/client/TablutClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonBlackClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonBlackClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +140,7 @@
       <option name="presentableId" value="Default" />
       <updated>1715255213736</updated>
       <workItem from="1715255214795" duration="3622000" />
-      <workItem from="1715330656115" duration="8225000" />
+      <workItem from="1715330656115" duration="6583000" />
     </task>
     <task id="LOCAL-00001" summary="continuo black heuristic + blackclient">
       <option name="closed" value="true" />
@@ -146,15 +150,7 @@
       <option name="project" value="LOCAL" />
       <updated>1715275239134</updated>
     </task>
-    <task id="LOCAL-00002" summary=" black heuristic va e vince">
-      <option name="closed" value="true" />
-      <created>1715337289617</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1715337289617</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,8 +158,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="continuo black heuristic + blackclient" />
-    <MESSAGE value=" black heuristic va e vince" />
-    <option name="LAST_COMMIT_MESSAGE" value=" black heuristic va e vince" />
+    <option name="LAST_COMMIT_MESSAGE" value="continuo black heuristic + blackclient" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
