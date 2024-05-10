@@ -17,7 +17,6 @@ import it.unibo.ai.didattica.competition.tablut.domain.State;
 // -> coprire sempre almeno parzialmente il rombo
 
 public class GrissinbonBlackHeuristic extends Heuristic{
-    private State state;
 
     //private final int[] throne = {4,4};
     private final int[][] positionsNearThrone = {{4,3}, {4,5}, {3,4}, {5,4}};
