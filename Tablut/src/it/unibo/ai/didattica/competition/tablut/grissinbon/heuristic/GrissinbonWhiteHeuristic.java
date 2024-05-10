@@ -17,20 +17,31 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
                     {20, 1, 1, -5, -6, -5, 1,  1, 20},
                     {0, 20, 20,-6, -6, -6,20, 20, 0}};
 
+    //migliori posizioni per i bianchi
+    private int[][] bestPositions = {
+            {2,3},  {3,5},
+            {5,3},  {6,5}
+    };
+
+    //Threshold usata per decidere se usare il peso delle bestPositions
+    private static int THRESHOLD_BEST = 2;
+
     private int pawnsBlack; // pedine NERE attuali
     private int pawnsWhite; // pedine BIANCHE attuali
     private int winningWaysForKing; // vie libere per il RE
     private Coordinates kingCoordinate;
     private int blackNearKing; // pedine NERE vicine al RE
     private double positions_sum; // pesi delle posizioni dei bianchi
+    private double whiteBestPositions; //bianchi nelle posizioni migliori
     //private double CRStartegicheFree;
 
-    private double WHITE_REMAINING_WEIGHT = 22.0;
-    private double BLACK_EATEN_WEIGHT = 12.0;
-    private double WINNING_WAYS_KING_WEIGHT = 50.0;
+    private double WHITE_REMAINING_WEIGHT = 24.0;
+    private double BLACK_EATEN_WEIGHT = 13.0;
+    private double WINNING_WAYS_KING_WEIGHT = 52.0;
     private double BLACK_NEAR_KING_WEIGHT = 6.0;
-    private double POSITION_WEIGHT = 0.4;
-    private double KING_POSITION_WEIGHT = 2;
+    private double POSITION_WEIGHT = 1.0;
+    private double KING_POSITION_WEIGHT = 2.0;
+    private double WHITE_BEST_POSITION = 2.0;
 
     private static int LOOSE = -1;
     private static int WIN = 1;
@@ -46,6 +57,7 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
         this.kingCoordinate=null;
         this.blackNearKing=0;
         this.positions_sum=0;
+        this.whiteBestPositions=0;
         //this.CRStartegicheFree = 0;
     }
 
@@ -66,6 +78,7 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
         result += winningWaysForKing*WINNING_WAYS_KING_WEIGHT;
         result += blackNearKing*BLACK_NEAR_KING_WEIGHT;
         result += this.positions_sum*POSITION_WEIGHT;
+        result += whiteBestPositions*WHITE_BEST_POSITION;
         //result += CRStartegicheFree;
 
         return result;
@@ -88,6 +101,8 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
                 }
             }
         }
+
+        whiteBestPositions = (double) (getNumberOnBestPositions() / this.bestPositions.length);
 
         if (this.kingCoordinate == null){
             return LOOSE;
@@ -126,6 +141,21 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
         }
         return 0;
 
+    }
+
+    private int getNumberOnBestPositions(){
+
+        int num = 0;
+
+        if (state.getNumberOf(State.Pawn.WHITE) >= 8 - THRESHOLD_BEST){
+            for(int[] pos: bestPositions){
+                if(state.getPawn(pos[0],pos[1]).equalsPawn(State.Pawn.WHITE.toString())){
+                    num++;
+                }
+            }
+        }
+
+        return num;
     }
 
     //TODO: da guardare ultima funzione righeColonneStrategicheLibere se ci serve
