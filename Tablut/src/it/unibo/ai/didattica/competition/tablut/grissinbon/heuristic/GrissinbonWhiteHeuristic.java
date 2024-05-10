@@ -33,6 +33,9 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
     private int blackNearKing; // pedine NERE vicine al RE
     private double positions_sum; // pesi delle posizioni dei bianchi
     private double whiteBestPositions; //bianchi nelle posizioni migliori
+
+    private double capture;    //possibilità di catturare una pedina nera
+    private int threats;    //pedine nere che minacciano pedine bianche
     //private double CRStartegicheFree;
 
     private double WHITE_REMAINING_WEIGHT = 24.0;
@@ -42,6 +45,9 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
     private double POSITION_WEIGHT = 1.0;
     private double KING_POSITION_WEIGHT = 2.0;
     private double WHITE_BEST_POSITION = 2.0;
+
+    private double THREATENING_PAWNS_WEIGHT = 1.0;
+    private double CAPTURE_WEIGHT = 2.0;
 
     private static int LOOSE = -1;
     private static int WIN = 1;
@@ -58,6 +64,9 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
         this.blackNearKing=0;
         this.positions_sum=0;
         this.whiteBestPositions=0;
+
+        this.threats=0;
+        this.capture=0;
         //this.CRStartegicheFree = 0;
     }
 
@@ -79,6 +88,9 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
         result += blackNearKing*BLACK_NEAR_KING_WEIGHT;
         result += this.positions_sum*POSITION_WEIGHT;
         result += whiteBestPositions*WHITE_BEST_POSITION;
+
+        result += threats*THREATENING_PAWNS_WEIGHT;
+        result += capture;
         //result += CRStartegicheFree;
 
         return result;
@@ -103,6 +115,8 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
         }
 
         whiteBestPositions = (double) (getNumberOnBestPositions() / this.bestPositions.length);
+        threats = evaluateThreateningBlackPawns();
+        capture = evaluateCapturing();  //la funzione mi restituisce praticamente numero di catture * CAPTURE_WEIGHT, come fanno le altre
 
         if (this.kingCoordinate == null){
             return LOOSE;
@@ -160,17 +174,141 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
 
     //TODO: da guardare ultima funzione righeColonneStrategicheLibere se ci serve
 
+    /*
+    *
+    * Scansiono la board in cerca di pedine nere "minacciose"
+    *
+    * minacciosa = pedina nera situata di fianco ad una pedina bianca o al re
+    *
+    * scopo: fare in modo che l'IA tenga in considerazione la situazione di tutti i pezzi bianchi in modo tale che,
+    * nel caso in cui non ci siano mosse migliori, muova le pedine bianche in posizioni più sicure (riducendo il
+    * numero di threateningPawns) per evitare che vengano mangiate a caso
+    *
+    */
+    private int evaluateThreateningBlackPawns() {
+        int threateningPawns = 0;
+        int totalThreats;
+        //TODO: ottimizzazione. Inserire questo in un precedente ciclo in modo da non dover ri-scansionare?
+        for (int i = 0; i < state.getBoard().length; i++) {
+            for (int j = 0; j < state.getBoard()[i].length; j++) {
+                if (state.getPawn(i, j).equalsPawn(State.Pawn.BLACK.toString())) {
+                    // Controlla se la pedina nera minaccia il re o altre pedine bianche
+                    if (isThreateningWhitePieces(i, j)) {
+                        threateningPawns++;
+                    }
+                }
+            }
+        }
+        totalThreats = threateningPawns + blackNearKing;
+        return totalThreats;
+    }
+
+    private boolean isThreateningWhitePieces(int x, int y) {
+        boolean threatensWhite = false; //a default, una pedina nera non è mai minacciosa
+
+        // Controlla se ci sono pedine bianche nelle posizioni adiacenti
+        if (x > 0 && state.getPawn(x - 1, y).equalsPawn(State.Pawn.WHITE.toString())) {
+            threatensWhite = true;
+        } else if (x < state.getBoard().length - 1 && state.getPawn(x + 1, y).equalsPawn(State.Pawn.WHITE.toString())) {
+            threatensWhite = true;
+        } else if (y > 0 && state.getPawn(x, y - 1).equalsPawn(State.Pawn.WHITE.toString())) {
+            threatensWhite = true;
+        } else if (y < state.getBoard().length - 1 && state.getPawn(x, y + 1).equalsPawn(State.Pawn.WHITE.toString())) {
+            threatensWhite = true;
+        }
+
+        return threatensWhite;
+    }
+
+    /*
+    * Per ogni pedina bianca guardo se può effettuare una cattura. Questo si verifica se la pedina bianca può muoversi
+    * in una direzione in cui c'è una pedina nera e adiacente a tale pedine nera ce n'è un'altra bianca. In tutti gli
+    * altri casi non può catturare.
+    *
+     */
+    private double evaluateCapturing() {
+        double capturingMovesScore = 0;
+        //TODO: ottimizzazione. Inserire questo in un precedente ciclo in modo da non dover ri-scansionare?
+        for (int i = 0; i < state.getBoard().length; i++) {
+            for (int j = 0; j < state.getBoard()[i].length; j++) {
+                if (state.getPawn(i, j).equalsPawn(State.Pawn.WHITE.toString())) {
+                    // Controlla se questa mossa può catturare una pedina nera avversaria
+                    capturingMovesScore = capturingMovesScore + evaluateCapturingMoves(i, j);
+                }
+            }
+        }
+
+        return capturingMovesScore;
+    }
+
+    private double evaluateCapturingMoves(int x, int y) {
+        double capturingMovesScore = 0;
+
+        // Valuta la possibilità di cattura in tutte e quattro le direzioni, ma appena trovo una cattura possibile mi
+        // fermo. Non mi interessa sapere se ce ne sono altre in altre direzioni, in quanto ne ho già trovata una.
+        capturingMovesScore = evaluateCaptureInDirection(x, y, 0, -1); // Sopra
+        if (capturingMovesScore == CAPTURE_WEIGHT) {
+            return capturingMovesScore;
+        }
+
+        capturingMovesScore = evaluateCaptureInDirection(x, y, 0, 1);  // Sotto
+        if (capturingMovesScore == CAPTURE_WEIGHT) {
+            return capturingMovesScore;
+        }
+
+        capturingMovesScore = evaluateCaptureInDirection(x, y, -1, 0); // Sinistra
+        if (capturingMovesScore == CAPTURE_WEIGHT) {
+            return capturingMovesScore;
+        }
+
+        capturingMovesScore = evaluateCaptureInDirection(x, y, 1, 0);  // Destra
+        if (capturingMovesScore == CAPTURE_WEIGHT) {
+            return capturingMovesScore;
+        }
+
+        return capturingMovesScore;
+    }
+
+    private double evaluateCaptureInDirection(int x, int y, int dx, int dy) {
+        double directionScore = 0;
+
+        // mi muovo di 1 casella nella direzione indicata
+        int currentX = x + dx;
+        int currentY = y + dy;
+        int consecutiveBlacks = 0;
+        boolean foundOpponent = false;
+        while (isValidPosition(currentX, currentY)) {
+            if (state.getPawn(currentX, currentY).equalsPawn(State.Pawn.EMPTY.toString()) && !foundOpponent) {
+                // La casella è vuota e non ho ancora trovato una pedina nera, quindi continuo la ricerca nella stessa direzione
+                currentX += dx;
+                currentY += dy;
+                continue;
+            } else if (state.getPawn(currentX, currentY).equalsPawn(State.Pawn.BLACK.toString()) && consecutiveBlacks==0) {
+                foundOpponent = true;
+                consecutiveBlacks++;
+            } else if(state.getPawn(currentX, currentY).equalsPawn(State.Pawn.WHITE.toString()) && !foundOpponent){
+                // La direzione è occupata da un altro bianco, quindi non è possibile catturare
+                break;
+            } else if (foundOpponent && state.getPawn(currentX, currentY).equalsPawn(State.Pawn.WHITE.toString())) {
+                // Se trova una pedina bianca dopo aver trovato la pedina nera avversaria, la mossa può catturare
+                directionScore = CAPTURE_WEIGHT;
+                break;
+            } else if (foundOpponent && consecutiveBlacks > 0) {
+                // Non è presente una pedina bianca opposta oppure ci sono più pedine nere consecutive, quindi non è possibile catturare
+                break;
+            }
+            //mi muovo di un'altra casella nella direzione indicata
+            currentX += dx;
+            currentY += dy;
+        }
+
+        return directionScore;
+    }
+
+
+    private boolean isValidPosition(int x, int y) {
+        // Verifica se la posizione è all'interno del tabellone
+        return x >= 0 && x < state.getBoard().length && y >= 0 && y < state.getBoard()[0].length;
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
