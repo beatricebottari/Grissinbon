@@ -16,26 +16,10 @@ import it.unibo.ai.didattica.competition.tablut.domain.State;
 // E evitare che il re vada in salvo
 // -> coprire sempre almeno parzialmente il rombo
 
-public class GrissinbonBlackHeuristic {
-
-    private static int LOOSE = -1;
-    private static int WIN = 1;
-
+public class GrissinbonBlackHeuristic extends Heuristic{
     private State state;
 
-    private final int[][] camps =           // gray citadels
-            {{0, 3}, {0, 4}, {0, 5}, {1, 4},
-            {3, 0}, {4, 0}, {5, 0}, {4, 1},
-            {8, 3}, {8, 4}, {8, 5}, {7, 4},
-            {3, 8}, {4, 8}, {5, 8}, {4, 7}};
-
-    private final int[][] escapes =       // stars
-            {{0,1}, {0,2}, {1,0}, {2,0},
-            {8,1}, {8,2}, {6,0}, {7,0},
-            {0,6}, {0,7}, {1,8}, {2,8},
-            {6,8}, {7,8}, {8,6}, {8,7}};
-
-    private final int[] throne = {4,4};
+    //private final int[] throne = {4,4};
     private final int[][] positionsNearThrone = {{4,3}, {4,5}, {3,4}, {5,4}};
     private int[] kingPosition;
 
@@ -55,8 +39,9 @@ public class GrissinbonBlackHeuristic {
     private double ENCIRCLE_WEIGHT = 900;
 
 
-    public GrissinbonBlackHeuristic (State state) {
-        this.state = state;
+    public GrissinbonBlackHeuristic (State state)
+    {
+        super(state);
     }
 
     public double evaluate() {
@@ -107,7 +92,7 @@ public class GrissinbonBlackHeuristic {
                 else if (state.getPawn(i, j).equalsPawn(State.Pawn.KING.toString())){
                     pawnsWHITE++;
                     kingPosition = new int[]{i,j};
-                    this.totalDistanceFromBlackOrSimilar += getDistanceFromBlackOrSimilar(i, j)*this.KING_BONUS;
+                    this.totalDistanceFromBlackOrSimilar += (int) (getDistanceFromBlackOrSimilar(i, j)*this.KING_BONUS);
                 }
                 else if (state.getPawn(i, j).equalsPawn(State.Pawn.BLACK.toString())) {
                     pawnsBLACK++;
@@ -127,12 +112,12 @@ public class GrissinbonBlackHeuristic {
 
         // free ways for king
         if(x < 3 || x > 5) {
-            if(checkFreeLeft(x,y)) freeWayForKing++;
-            if(checkFreeRight(x,y)) freeWayForKing++;
+            if(checkLeft(x,y)) freeWayForKing++;
+            if(checkRight(x,y)) freeWayForKing++;
         }
         if(y < 3 || y > 5) {
-            if(checkFreeUp(x,y)) freeWayForKing++;
-            if(checkFreeDown(x,y)) freeWayForKing++;
+            if(checkUp(x,y)) freeWayForKing++;
+            if(checkDown(x,y)) freeWayForKing++;
         }
 
         // black adjacent king
@@ -150,14 +135,14 @@ public class GrissinbonBlackHeuristic {
         return 0;
     }
 
+
     private boolean isEscape(int x, int y) {
-        for (int[] escape : this.escapes) {
-            if (escape[0] == x && escape[1] == y)
+        if(escape.contains(state.getBox(this.kingPosition[0], this.kingPosition[1])))
                 return true;
-        }
         return false;
     }
 
+    /*
     private boolean isCamp(int x, int y) {
         for (int[] camp : this.camps){
             if(camp[0] == x && camp[1] == y) return true;
@@ -165,10 +150,11 @@ public class GrissinbonBlackHeuristic {
         return false;
     }
 
+
     private boolean isFree(int x, int y) {
         if(this.state.getPawn(x, y).equalsPawn(State.Pawn.BLACK.toString()) ||
                 this.state.getPawn(x, y).equalsPawn(State.Pawn.WHITE.toString()) ||
-                this.isCamp(x,y))
+                //this.isCamp(x,y))
             return false;
         else
             return true;
@@ -201,11 +187,11 @@ public class GrissinbonBlackHeuristic {
         }
         return true;
     }
-
+*/
     private boolean isBlackOrSimilar(int x, int y) {
         if(this.state.getPawn(x, y).equalsPawn(State.Pawn.BLACK.toString())
                 || this.state.getPawn(x, y).equalsPawn(State.Pawn.THRONE.toString())
-                || isCamp(x, y))
+                || camps.contains(state.getBox(x, y)))
             return false;
         else
             return true;
@@ -279,7 +265,7 @@ public class GrissinbonBlackHeuristic {
     }
 
     public int getNumBlackNeedToEat() {
-        if(kingPosition == throne)
+        if(throne.equals(state.getBox(kingPosition[0], kingPosition[1])))
             return 4;
         else if(isNearThrone(kingPosition[0], kingPosition[1]))
             return 3;
