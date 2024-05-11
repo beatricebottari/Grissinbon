@@ -39,14 +39,13 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
     //private double CRStartegicheFree;
 
     private double WHITE_REMAINING_WEIGHT = 24.0;
-    private double BLACK_EATEN_WEIGHT = 13.0;
+    private double BLACK_EATEN_WEIGHT = 12.0;
     private double WINNING_WAYS_KING_WEIGHT = 52.0;
     private double BLACK_NEAR_KING_WEIGHT = 6.0;
     private double POSITION_WEIGHT = 1.0;
     private double KING_POSITION_WEIGHT = 2.0;
-    private double WHITE_BEST_POSITION = 2.0;
-
-    private double THREATENING_PAWNS_WEIGHT = 1.0;
+    private double WHITE_BEST_POSITION = 1.0;
+    private double THREATENING_PAWNS_WEIGHT = 0.3;
     private double CAPTURE_WEIGHT = 2.0;
 
     private static int LOOSE = -1;
@@ -85,11 +84,11 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
         result += (16 - pawnsBlack)*BLACK_EATEN_WEIGHT;
         result += pawnsWhite*WHITE_REMAINING_WEIGHT;
         result += winningWaysForKing*WINNING_WAYS_KING_WEIGHT;
-        result += blackNearKing*BLACK_NEAR_KING_WEIGHT;
+        result -= blackNearKing*BLACK_NEAR_KING_WEIGHT;
         result += this.positions_sum*POSITION_WEIGHT;
         result += whiteBestPositions*WHITE_BEST_POSITION;
 
-        result += threats*THREATENING_PAWNS_WEIGHT;
+        result -= threats*THREATENING_PAWNS_WEIGHT;
         result += capture;
         //result += CRStartegicheFree;
 
@@ -102,6 +101,8 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
             for (int j = 0; j <state.getBoard()[i].length; j++) {
                 if(state.getPawn(i, j).equalsPawn(State.Pawn.WHITE.toString())) {
                     pawnsWhite++;
+                    // Controlla se questa pedina può catturare una pedina nera avversaria
+                    capture = capture + evaluateCapturingMoves(i, j);
                 }
                 else if (state.getPawn(i, j).equalsPawn(State.Pawn.KING.toString())){
                     pawnsWhite++;
@@ -110,14 +111,14 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
                     this.positions_sum += this.pesi_posizione_re[i][j]*KING_POSITION_WEIGHT;
                 } else if (state.getPawn(i, j).equalsPawn(State.Pawn.BLACK.toString())){
                     pawnsBlack++;
+                    if (isThreateningWhitePieces(i, j)) {
+                        this.threats++;
+                    }
                 }
             }
         }
 
         whiteBestPositions = (double) (getNumberOnBestPositions() / this.bestPositions.length);
-        threats = evaluateThreateningBlackPawns();
-        capture = evaluateCapturing();  //la funzione mi restituisce praticamente numero di catture * CAPTURE_WEIGHT, come fanno le altre
-
         if (this.kingCoordinate == null){
             return LOOSE;
         } else if (escapes.contains(state.getBox(kingCoordinate.getX(), kingCoordinate.getY()))) {
@@ -185,23 +186,6 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
     * numero di threateningPawns) per evitare che vengano mangiate a caso
     *
     */
-    private int evaluateThreateningBlackPawns() {
-        int threateningPawns = 0;
-        int totalThreats;
-        //TODO: ottimizzazione. Inserire questo in un precedente ciclo in modo da non dover ri-scansionare?
-        for (int i = 0; i < state.getBoard().length; i++) {
-            for (int j = 0; j < state.getBoard()[i].length; j++) {
-                if (state.getPawn(i, j).equalsPawn(State.Pawn.BLACK.toString())) {
-                    // Controlla se la pedina nera minaccia il re o altre pedine bianche
-                    if (isThreateningWhitePieces(i, j)) {
-                        threateningPawns++;
-                    }
-                }
-            }
-        }
-        totalThreats = threateningPawns + blackNearKing;
-        return totalThreats;
-    }
 
     private boolean isThreateningWhitePieces(int x, int y) {
         boolean threatensWhite = false; //a default, una pedina nera non è mai minacciosa
@@ -226,20 +210,6 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
     * altri casi non può catturare.
     *
      */
-    private double evaluateCapturing() {
-        double capturingMovesScore = 0;
-        //TODO: ottimizzazione. Inserire questo in un precedente ciclo in modo da non dover ri-scansionare?
-        for (int i = 0; i < state.getBoard().length; i++) {
-            for (int j = 0; j < state.getBoard()[i].length; j++) {
-                if (state.getPawn(i, j).equalsPawn(State.Pawn.WHITE.toString())) {
-                    // Controlla se questa mossa può catturare una pedina nera avversaria
-                    capturingMovesScore = capturingMovesScore + evaluateCapturingMoves(i, j);
-                }
-            }
-        }
-
-        return capturingMovesScore;
-    }
 
     private double evaluateCapturingMoves(int x, int y) {
         double capturingMovesScore = 0;
@@ -278,7 +248,9 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
         int consecutiveBlacks = 0;
         boolean foundOpponent = false;
         while (isValidPosition(currentX, currentY)) {
-            if (state.getPawn(currentX, currentY).equalsPawn(State.Pawn.EMPTY.toString()) && !foundOpponent) {
+            if(camps.contains(state.getBox(x, y))) {
+                break;
+            } else if (state.getPawn(currentX, currentY).equalsPawn(State.Pawn.EMPTY.toString()) && !foundOpponent) {
                 // La casella è vuota e non ho ancora trovato una pedina nera, quindi continuo la ricerca nella stessa direzione
                 currentX += dx;
                 currentY += dy;
@@ -308,7 +280,7 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
 
     private boolean isValidPosition(int x, int y) {
         // Verifica se la posizione è all'interno del tabellone
-        return x >= 0 && x < state.getBoard().length && y >= 0 && y < state.getBoard()[0].length;
+        return x >= 0 && x < state.getBoard().length-1 && y >= 0 && y < state.getBoard().length-1;
     }
 
 }
