@@ -32,8 +32,8 @@ public class GrissinbonBlackClient {
         }
         else
         {
-            System.out.println("ALGISE BLACK CLIENT: INVOCAZIONE ERRATA.");
-            System.out.println("Invocazione: AlgiseBlackClient [timeout] [ip]");
+            System.out.println("GRISSINBON BLACK CLIENT: INVOCAZIONE ERRATA.");
+            System.out.println("Invocazione: GrissinbonBlackClient [timeout] [ip]");
             System.exit(1);
         }
         GrissinbonClient.main(array);
