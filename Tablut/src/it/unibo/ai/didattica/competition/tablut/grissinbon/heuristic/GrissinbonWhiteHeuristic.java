@@ -36,7 +36,6 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
 
     private double capture;    //possibilità di catturare una pedina nera
     private int threats;    //pedine nere che minacciano pedine bianche
-    //private double CRStartegicheFree;
 
     private double WHITE_REMAINING_WEIGHT = 24.0;
     private double BLACK_EATEN_WEIGHT = 12.0;
@@ -66,7 +65,6 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
 
         this.threats=0;
         this.capture=0;
-        //this.CRStartegicheFree = 0;
     }
 
     public double evaluate(){
@@ -90,7 +88,6 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
 
         result -= threats*THREATENING_PAWNS_WEIGHT;
         result += capture;
-        //result += CRStartegicheFree;
 
         return result;
     }
@@ -172,8 +169,6 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
 
         return num;
     }
-
-    //TODO: da guardare ultima funzione righeColonneStrategicheLibere se ci serve
 
     /*
     *

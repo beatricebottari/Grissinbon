@@ -140,53 +140,6 @@ public class GrissinbonBlackHeuristic extends Heuristic{
                 return true;
         return false;
     }
-
-    /*
-    private boolean isCamp(int x, int y) {
-        for (int[] camp : this.camps){
-            if(camp[0] == x && camp[1] == y) return true;
-        }
-        return false;
-    }
-
-
-    private boolean isFree(int x, int y) {
-        if(this.state.getPawn(x, y).equalsPawn(State.Pawn.BLACK.toString()) ||
-                this.state.getPawn(x, y).equalsPawn(State.Pawn.WHITE.toString()) ||
-                //this.isCamp(x,y))
-            return false;
-        else
-            return true;
-    }
-
-    private boolean checkFreeLeft(int row,int column) {
-        for( int i=row; i>= 0; i--) {
-            if(isFree(i, column)) return false;
-        }
-        return true;
-    }
-
-    private boolean checkFreeRight(int row,int column) {
-        for( int i=row; i< 9; i++) {
-            if(isFree(i, column)) return false;
-        }
-        return true;
-    }
-
-    private boolean checkFreeUp(int row,int column) {
-        for( int i=column; i>= 0; i--) {
-            if(isFree(row, i)) return false;
-        }
-        return true;
-    }
-
-    private boolean checkFreeDown(int row,int column) {
-        for( int i=column; i < 9; i++) {
-            if(isFree(row, i)) return false;
-        }
-        return true;
-    }
-*/
     private boolean isBlackOrSimilar(int x, int y) {
         if(this.state.getPawn(x, y).equalsPawn(State.Pawn.BLACK.toString())
                 || this.state.getPawn(x, y).equalsPawn(State.Pawn.THRONE.toString())

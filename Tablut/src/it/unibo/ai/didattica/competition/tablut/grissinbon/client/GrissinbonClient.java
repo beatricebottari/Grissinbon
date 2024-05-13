@@ -56,7 +56,9 @@ public class GrissinbonClient extends TablutClient {
             else {
                 gameRules = new GameAshtonTablut(99, 0, "logs", "whiteOpponent", this.getName());
             }
-            System.out.println("GAME RULESSSSSSS"+gameRules.toString());
+            System.out.println("Player: " + (this.getPlayer().equals(State.Turn.BLACK) ? "BLACK" : "WHITE" ));
+            System.out.println("Timeout: " + this.timeout +" s");
+            System.out.println("Server: " + this.serverIp);
 
             while (true) {
 
@@ -174,8 +176,6 @@ public class GrissinbonClient extends TablutClient {
     private Action findBestMove(GameAshtonTablut tablutGame, State state) {
 
         GrissinbonIterativeDeepeningAlphaBetaSearch search = new GrissinbonIterativeDeepeningAlphaBetaSearch(tablutGame, Double.MIN_VALUE, Double.MAX_VALUE, this.timeout-2);;
-        if(search == null)
-            System.out.println("SEARCHHHHHHHH"+search);
         return search.makeDecision(state);
     }
 
