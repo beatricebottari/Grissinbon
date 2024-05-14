@@ -243,7 +243,7 @@ public class GrissinbonWhiteHeuristic extends Heuristic {
         int consecutiveBlacks = 0;
         boolean foundOpponent = false;
         while (isValidPosition(currentX, currentY)) {
-            if(camps.contains(state.getBox(x, y))) {
+            if(camps.contains(state.getBox(currentX, currentY))) {
                 break;
             } else if (state.getPawn(currentX, currentY).equalsPawn(State.Pawn.EMPTY.toString()) && !foundOpponent) {
                 // La casella è vuota e non ho ancora trovato una pedina nera, quindi continuo la ricerca nella stessa direzione

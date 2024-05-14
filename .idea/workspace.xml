@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1a09932-a80e-4f36-8f3c-5227efca7a9f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonBlackHeuristic.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonBlackHeuristic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonWhiteHeuristic.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonWhiteHeuristic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/domain/GameAshtonTablut.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonBlackClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonBlackClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonWhiteClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonWhiteClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonBlackHeuristic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonBlackHeuristic.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonWhiteHeuristic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grissinbon/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/GrissinbonWhiteHeuristic.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +74,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GrissinbonWhiteClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unibo.ai.didattica.competition.tablut.grissinbon.client.GrissinbonWhiteClient" />
+      <module name="Grissinbon" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unibo.ai.didattica.competition.tablut.grissinbon.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unibo.ai.didattica.competition.tablut.server.Server" />
       <module name="Grissinbon" />
@@ -109,8 +129,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.GrissinbonBlackClient" />
-        <item itemvalue="Application.TablutRandomWhiteClient" />
+        <item itemvalue="Application.GrissinbonWhiteClient" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Application.TablutRandomWhiteClient" />
         <item itemvalue="Application.TablutRandomBlackClient" />
       </list>
     </recent_temporary>
@@ -133,6 +154,11 @@
       <updated>1715255213736</updated>
       <workItem from="1715255214795" duration="3622000" />
       <workItem from="1715330656115" duration="6583000" />
+      <workItem from="1715445734216" duration="1586000" />
+      <workItem from="1715586264256" duration="3504000" />
+      <workItem from="1715591117074" duration="48000" />
+      <workItem from="1715591192282" duration="2134000" />
+      <workItem from="1715615257786" duration="6949000" />
     </task>
     <task id="LOCAL-00001" summary="continuo black heuristic + blackclient">
       <option name="closed" value="true" />
@@ -142,7 +168,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715275239134</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="aggiustamento heristic pt.2">
+      <option name="closed" value="true" />
+      <created>1715339168966</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1715339168966</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,7 +195,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="continuo black heuristic + blackclient" />
-    <option name="LAST_COMMIT_MESSAGE" value="continuo black heuristic + blackclient" />
+    <MESSAGE value="aggiustamento heristic pt.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiustamento heristic pt.2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -173,23 +208,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.java</url>
-          <line>124</line>
+          <line>126</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.java</url>
-          <line>129</line>
+          <line>131</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/client/GrissinbonClient.java</url>
-          <line>175</line>
+          <line>177</line>
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Tablut/src/it/unibo/ai/didattica/competition/tablut/grissinbon/heuristic/Heuristic.java</url>
-          <line>6</line>
-          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
