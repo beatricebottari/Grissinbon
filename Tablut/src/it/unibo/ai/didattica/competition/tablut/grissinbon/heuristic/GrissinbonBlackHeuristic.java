@@ -32,12 +32,12 @@ public class GrissinbonBlackHeuristic extends Heuristic{
     private double capture;
 
     // Weights
-    private double BLACK_WEIGHT = 6.0;
-    private double WHITE_WEIGHT = 12.0;
-    private double FREE_WAY_FOR_KING = 20.0;    // -free_way_for_king --> +rhombus ratio or similar
+    private double BLACK_WEIGHT = 12.0;
+    private double WHITE_WEIGHT = 24.0;
+    private double FREE_WAY_FOR_KING = 50.0;    // -free_way_for_king --> +rhombus ratio or similar
     private double KING_BONUS = 7.0 ;
-    private double ENCIRCLE_WEIGHT = 900;
-    private double CAPTURE_WEIGHT = 2.0;
+    private double ENCIRCLE_WEIGHT = 300;
+    private double CAPTURE_WEIGHT = 30.0;
 
 
     public GrissinbonBlackHeuristic (State state)
